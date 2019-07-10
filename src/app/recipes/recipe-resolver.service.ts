@@ -2,12 +2,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/r
 import { Observable } from "rxjs";
 import { RecipeService } from "./recipe.service";
 import { Injectable } from "@angular/core";
-
-interface Recipe{
-    name: string;
-    img: string;
-    description: string;
-}
+import { Recipe } from "./recipe.model";
 
 @Injectable()
 export class RecipeResolver implements Resolve<Recipe>{
