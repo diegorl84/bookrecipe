@@ -14,7 +14,8 @@ export class RecipeDetailComponent implements OnInit {
   @Input()  index: number;
 
   constructor(private recipeService : RecipeService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe(
@@ -28,4 +29,8 @@ export class RecipeDetailComponent implements OnInit {
     this.recipeService.addIngredientsToShoppignList(this.recipe.ingredients); 
   }
 
+  deleteRecipe(){
+    this.recipeService.deleteRecipe(this.index);
+    this.router.navigate(['/']);
+  }
 }

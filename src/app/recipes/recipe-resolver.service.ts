@@ -9,6 +9,8 @@ export class RecipeResolver implements Resolve<Recipe>{
     constructor(private recipeService: RecipeService){}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Recipe | Observable<Recipe> | Promise<Recipe> {
+       console.log("Call Resolver");
+       
         return this.recipeService.getRecipeByIndex(+route.params['index']);  
     }
     
