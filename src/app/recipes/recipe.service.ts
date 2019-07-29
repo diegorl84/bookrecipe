@@ -7,7 +7,6 @@ export class RecipeService {
   recipesChange = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [];
-  
 
   constructor(private shoppingListService: ShoppingListService) {}
 
