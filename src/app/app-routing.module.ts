@@ -5,9 +5,9 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
 import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.component";
 import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.component";
-import { RecipeResolver } from "./recipes/recipe-resolver.service";
 import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
 import { RecipesResolverService } from "./recipes/recipes-resolver.service";
+import { AuthComponent } from "./auth/auth.component";
 
 const appRoutes: Routes = [
   { path: "", redirectTo: "/recipes", pathMatch: "full" },
@@ -39,7 +39,7 @@ const appRoutes: Routes = [
       }
     ]
   },
-  { path: "auth", component: ShoppingListComponent },
+  { path: "auth", component: AuthComponent },
   { path: "shopping-list", component: ShoppingListComponent },
   { path: "**", component: PageNotFoundComponent }
 ];

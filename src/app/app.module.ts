@@ -19,6 +19,8 @@ import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.compon
 import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
 import { HttpClientModule } from "@angular/common/http";
 import { RecipesResolverService } from "./recipes/recipes-resolver.service";
+import { AuthComponent } from "./auth/auth.component";
+import { LoadingSpinnerComponent } from "./shared/loading-spinner/loading-spinner.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { RecipesResolverService } from "./recipes/recipes-resolver.service";
     DropdownDirective,
     PageNotFoundComponent,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
