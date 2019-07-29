@@ -9,14 +9,14 @@ import { Router } from "@angular/router";
   templateUrl: "./auth.component.html"
 })
 export class AuthComponent {
-  isLogingMode = true;
+  isLoginMode = true;
   isLoading = false;
   errorMessage: string = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   onSwitchMode() {
-    this.isLogingMode = !this.isLogingMode;
+    this.isLoginMode = !this.isLoginMode;
   }
 
   onSubmit(form: NgForm) {
@@ -30,7 +30,7 @@ export class AuthComponent {
 
     let authObservable: Observable<AuthResposeData>;
 
-    if (this.isLogingMode) {
+    if (this.isLoginMode) {
       authObservable = this.authService.login(email, password);
     } else {
       authObservable = this.authService.signUp(email, password);

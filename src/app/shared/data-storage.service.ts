@@ -26,22 +26,10 @@ export class DataStorageService {
   }
 
   fetchRecipes() {
-    /**
-     * Take subscribe, take the last user and unsubscribe
-     * exhaustMap replace the first observable to the exhausted one.
-     * First the USER observable is executed but when it finished the new observable HTTP takes place
-     */
 
-    return this.authService.user.pipe(
-      take(1),
-      exhaustMap(user => {
-        return this.http.get<Recipe[]>(
-          "https://ng-complete-guide-2c30e.firebaseio.com/recipes.json",
-          {
-            params: new HttpParams().set('auth', user.token)
-          }
-        );
-      }),
+    return this.http.get<Recipe[]>(
+      "https://ng-complete-guide-2c30e.firebaseio.com/recipes.json"
+    ).pipe(
       map(recipes => {
         return recipes.map(recipe => {
           return {
