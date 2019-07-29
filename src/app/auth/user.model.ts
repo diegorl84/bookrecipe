@@ -4,13 +4,12 @@ export class User {
     public id: string,
     private _token: string,
     private _tokenExpirationDate: Date
-  ) {
+  ) {}
 
-    get token(){
-        if(!this._tokenExpirationDate || new Date() > this._tokenExpirationDate){
-            return this._token;
-        }
-        retunr this._token;
+  get token(){
+    if(!this._tokenExpirationDate || new Date() > this._tokenExpirationDate){
+        return this._token;
     }
-  }
+    return this._token;
+}
 }
