@@ -5,28 +5,20 @@ import { HeaderComponent } from "./header/header.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { HttpClientModule } from "@angular/common/http";
-import { RecipesModule } from "./recipes/recipes.module";
-import { ShoppingListModule } from "./shopping-list/shopping-list.module";
 import { ShareModule } from "./shared/share.module";
 import { CoreModule } from "./core.module";
-import { AuthModule } from "./auth/auth.module";
+import { LoggingService } from "./logging.service";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    PageNotFoundComponent
-  ],
+  declarations: [AppComponent, HeaderComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RecipesModule,
-    ShoppingListModule,
-    AuthModule,
     ShareModule,
     CoreModule
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [LoggingService]
 })
 export class AppModule {}
