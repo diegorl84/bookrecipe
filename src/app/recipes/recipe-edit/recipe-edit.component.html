@@ -110,9 +110,8 @@
           <button
             type="button"
             class="btn btn-danger"
-            [routerLink]="['/']"
-            routerLinkActive="router-link-active"
-          >
+            (click)="onCancel()"
+            >
             Cancel
           </button>
         </div>

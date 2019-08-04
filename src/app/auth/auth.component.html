@@ -3,12 +3,8 @@
     <div *ngIf="isLoading" style="text-align: center;">
       <app-loading-spinner></app-loading-spinner>
     </div>
-    <!-- <div class="alert alert-danger" *ngIf="errorMessage">
-      <p>{{ errorMessage }}</p>
-    </div> -->
     <ng-template appPlaceHolder></ng-template>
     
-    <!-- <app-alert [message]="errorMessage" *ngIf="errorMessage" (close)="onHandleError()"></app-alert> -->
     <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!isLoading">
       <div class="form-group">
         <label for="email">E-mail</label>
@@ -40,7 +36,7 @@
           class="btn btn-primary"
           [disabled]="!authForm.valid"
         >
-          {{ isLogingMode ? "Login" : "Signup" }}
+          {{ isLoginMode ? "Login" : "Signup" }}
         </button>
         <button type="button" class="btn btn-primary" (click)="onSwitchMode()">
           Switch to {{ !isLogingMode ? "Login" : "Signup" }}

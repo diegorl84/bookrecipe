@@ -31,6 +31,8 @@ export class DataStorageService {
       "https://ng-recipe-977f4.firebaseio.com/recipes.json"
     ).pipe(
       map(recipes => {
+        console.log(recipes);
+        
         return recipes.map(recipe => {
           return {
             ...recipe,
