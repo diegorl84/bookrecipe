@@ -1,18 +1,20 @@
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/ingredient.model";
-import { ShoppingListService } from "../shopping-list/shopping-list.service";
 import { Subject } from "rxjs";
+import { Store } from "@ngrx/store";
+import * as ShoppingListActions from "../shopping-list/store/shopping-list.actions";
+import * as fromShoppingList from "../shopping-list/store/shopping-list.reducer";
 
 export class RecipeService {
   recipesChange = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [];
 
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(private store: Store<fromShoppingList.AppState>) {}
 
-  setRecipes(recipes: Recipe[]){
+  setRecipes(recipes: Recipe[]) {
     this.recipes = recipes;
-    this.recipesChange.next(this.recipes.slice())
+    this.recipesChange.next(this.recipes.slice());
   }
 
   getRecipes() {
@@ -20,7 +22,8 @@ export class RecipeService {
   }
 
   addIngredientsToShoppignList(ingredients: Ingredient[]) {
-    this.shoppingListService.addIngredents(ingredients);
+    // this.shoppingListService.addIngredents(ingredients);
+    this.store.dispatch(new ShoppingListActions.AddIngredients(ingredients));
   }
 
   getRecipeByIndex(index: number): Recipe {
