@@ -1,36 +1,58 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Recipe } from '../recipe.model';
-import { RecipeService } from '../recipe.service';
-import { ActivatedRoute, Router, Data, Params } from '@angular/router';
+import { Component, OnInit, Input } from "@angular/core";
+import { Recipe } from "../recipe.model";
+import { ActivatedRoute, Router, Params } from "@angular/router";
+import { Store } from "@ngrx/store";
+import * as fromApp from "../../store/app.reducer";
+import { map, switchMap } from "rxjs/operators";
+import * as RecipesActions from "../store/recipe.actions";
+import * as ShoppingListActions from "../../shopping-list/store/shopping-list.actions";
 
 @Component({
-  selector: 'app-recipe-detail',
-  templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.css']
+  selector: "app-recipe-detail",
+  templateUrl: "./recipe-detail.component.html",
+  styleUrls: ["./recipe-detail.component.css"]
 })
 export class RecipeDetailComponent implements OnInit {
-
   recipe: Recipe;
-  @Input()  index: number;
+  id: number;
+  @Input() index: number;
 
-  constructor(private recipeService : RecipeService,
-              private route: ActivatedRoute,
-              private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private store: Store<fromApp.AppState>
+  ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.recipe = this.recipeService.getRecipeByIndex(+params['index']);
-      }
-    )
-  }
-  
-  addToShopppingList(){
-    this.recipeService.addIngredientsToShoppignList(this.recipe.ingredients); 
+    this.route.params
+      .pipe(
+        map(params => {
+          return +params["index"];
+        }),
+        switchMap(id => {
+          this.id = id;
+          return this.store.select("recipes");
+        }),
+        map(recipesState => {
+          return recipesState.recipes.find((recipe, index) => {
+            return index === this.id;
+          });
+        })
+      )
+      .subscribe(recipe => {
+        this.recipe = recipe;
+      });
   }
 
-  deleteRecipe(){
-    this.recipeService.deleteRecipe(this.index);
-    this.router.navigate(['/']);
+  addToShopppingList() {
+    this.store.dispatch(
+      new ShoppingListActions.AddIngredients(this.recipe.ingredients)
+    );
+  }
+
+  deleteRecipe() {
+    // this.recipeService.deleteRecipe(this.index);
+    this.store.dispatch(new RecipesActions.DeleteRecipe(this.index));
+    this.router.navigate(["/recipes"]);
   }
 }

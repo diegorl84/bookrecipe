@@ -3,9 +3,6 @@ import { Routes, RouterModule, PreloadAllModules } from "@angular/router";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: "/auth", pathMatch: "full" },
-  // { path: 'recipes', loadChildren: () => import('./recipes/recipes.module').then(mod => mod.RecipesModule)},
-  // { path: 'shopping-list', loadChildren: () => import('./shopping-list/shopping-list.module').then(mod => mod.ShoppingListModule)},
-  // { path: 'auth', loadChildren: () => import('./auth/auth.module').then(mod => mod.AuthModule) }
   { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule'},
   { path: 'shopping-list', loadChildren: './shopping-list/shopping-list.module#ShoppingListModule'},
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule' }
